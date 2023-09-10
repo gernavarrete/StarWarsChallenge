@@ -2,11 +2,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
   background: url('../assets/media/supernovaexplosion0.webp');
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 100vh;
   z-index: -3;
+  
 }
 
 .main::before {
@@ -17,8 +19,8 @@
   height: 100%;
   left: 0;
   top: 0;
-  background:radial-gradient(circle at center,#000000 20%,#ffffff 100% );
-  z-index: -1;
+  background:radial-gradient(circle at center,#000000 5%,#ffffff 100% );
+  z-index: -2;
   opacity: 0.8;
   mix-blend-mode:multiply;
 }

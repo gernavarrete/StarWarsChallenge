@@ -8,9 +8,10 @@
     background: url('../../assets/media/personajes.webp');
     background-size: cover;
     background-repeat: no-repeat;
-    min-height: 100vh;
-    z-index: -2;
-    
+    width: 100%;
+    height: 100%;
+    z-index: -3;
+    overflow-y: auto;
 }
 
 .divContainerPeople::before {
@@ -23,12 +24,14 @@
     top: 0;
     background:black;
     z-index: -1;
-    opacity: 0.8;
+    opacity: 0.9;
     mix-blend-mode: multiply;
   }
+
 
 .divContainerPeople h1 {
     margin-top: 1rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    text-shadow: 0 0 2px #2B4169;
+    text-shadow: 0 0 5px #5e626b;
+    color:yellow;
 }

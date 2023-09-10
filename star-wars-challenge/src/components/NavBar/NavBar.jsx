@@ -5,7 +5,8 @@ import style from "./NavBar.module.css";
 import { alpha, styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { PageListContext } from "../PageList/PageList";
 
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -31,15 +32,21 @@ const CssTextField = styled(TextField)({
   },
 });
 
-function NavBar({ category, selectName }) {
-  const categoryOptions = category?.map((obj) => obj.name);
-  //console.log(categoryOptions);
+function NavBar({ filterByName }) {
   const [name, setName] = useState("");
+  const [inputByName, setInputByName] = useState("");
+  const { selectName, tableHead } = useContext(PageListContext);
 
   const handleSearch = (e) => {
     e.preventDefault();
     selectName(name);
-    console.log(name);
+    setName("");
+  };
+
+  const handleByName = (e) => {
+    e.preventDefault();
+    console.log(inputByName);
+    filterByName(inputByName);
   };
 
   return (
@@ -126,11 +133,20 @@ function NavBar({ category, selectName }) {
             maxWidth: "100%",
             minWidth: "30%",
           }}
+          onChange={handleByName}
         >
           <CssTextField
             fullWidth
-            label="fullWidth"
-            id="fullWidth"
+            label="Filter By Name"
+            id="filterByName"
+            type="text"
+            value={inputByName}
+            onChange={(e) => setInputByName(e.target.value)}
+            InputProps={{
+              style: {
+                color: "#E4D9E0",
+              },
+            }}
             InputLabelProps={{
               style: {
                 color: "#E4D9E0",
@@ -147,8 +163,13 @@ function NavBar({ category, selectName }) {
         >
           <CssTextField
             fullWidth
-            label="Gender"
-            id="gender"
+            label={`Filter By Gender`}
+            id="filterByGender"
+            InputProps={{
+              style: {
+                color: "#E4D9E0",
+              },
+            }}
             InputLabelProps={{
               style: {
                 color: "#E4D9E0",
@@ -165,8 +186,13 @@ function NavBar({ category, selectName }) {
         >
           <CssTextField
             fullWidth
-            label="fullWidth"
-            id="fullWidth"
+            label="Filter By Heigth"
+            id="filterByHeigth"
+            InputProps={{
+              style: {
+                color: "#E4D9E0",
+              },
+            }}
             InputLabelProps={{
               style: {
                 color: "#E4D9E0",
