@@ -5,8 +5,11 @@ import style from "./NavBar.module.css";
 import { alpha, styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PageListContext } from "../PageList/PageList";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -32,10 +35,14 @@ const CssTextField = styled(TextField)({
   },
 });
 
-function NavBar({ filterByName }) {
+function NavBar({ handleFilterBytext, orderByProp }) {
   const [name, setName] = useState("");
   const [inputByName, setInputByName] = useState("");
-  const { selectName, tableHead } = useContext(PageListContext);
+  const [inputByOtherString, setInputByOtherString] = useState("");
+  const [typeFilter, setTypeFilter] = useState("");
+  const [ascendingOrder, setAscendingOrder] = useState("");
+  const { selectName, tableData } = useContext(PageListContext);
+  const { tableHead } = tableData;
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -43,11 +50,38 @@ function NavBar({ filterByName }) {
     setName("");
   };
 
-  const handleByName = (e) => {
+  const handleByText = (e) => {
     e.preventDefault();
-    console.log(inputByName);
-    filterByName(inputByName);
+
+    if (e.target.id.toLowerCase() === "name") {
+      setTypeFilter("name");
+      setInputByName(e.target.value);
+      //handleFilterBytext(inputByName, e.target.id.toLowerCase());
+    } else if (e.target.id.toLowerCase() === tableHead[0].toLowerCase()) {
+      setTypeFilter(e.target.id.toLowerCase());
+      setInputByOtherString(e.target.value);
+      //handleFilterBytext(inputByOtherString, e.target.id.toLowerCase());
+    }
   };
+
+  useEffect(() => {
+    if (typeFilter === "name") {
+      //setInputByName(e.target.value)
+      handleFilterBytext(inputByName, typeFilter);
+    } else if (typeFilter === tableHead[0].toLowerCase()) {
+      //setInputByOtherString(e.target.value)
+      handleFilterBytext(inputByOtherString, typeFilter);
+    }
+  }, [inputByName, inputByOtherString, typeFilter]);
+
+  const handleChangeOrder = (e) => {
+    e.preventDefault();
+    setAscendingOrder(e.target.value);
+  };
+
+  useEffect(() => {
+    orderByProp(ascendingOrder, tableHead[3].toLowerCase());
+  }, [ascendingOrder]);
 
   return (
     <div className={style.divContainerNavBar}>
@@ -133,15 +167,15 @@ function NavBar({ filterByName }) {
             maxWidth: "100%",
             minWidth: "30%",
           }}
-          onChange={handleByName}
+          //onChange={(e) => handleByText(e)}
         >
           <CssTextField
             fullWidth
             label="Filter By Name"
-            id="filterByName"
+            id="name"
             type="text"
             value={inputByName}
-            onChange={(e) => setInputByName(e.target.value)}
+            onChange={(e) => handleByText(e)}
             InputProps={{
               style: {
                 color: "#E4D9E0",
@@ -160,11 +194,18 @@ function NavBar({ filterByName }) {
             maxWidth: "100%",
             minWidth: "30%",
           }}
+          //onChange={handleByText}
         >
           <CssTextField
             fullWidth
-            label={`Filter By Gender`}
-            id="filterByGender"
+            label={`Filter By ${
+              tableHead[0].toLowerCase()[0].toUpperCase() +
+              tableHead[0].toLowerCase().slice(1)
+            }`}
+            id={`${tableHead[0]}`}
+            type="text"
+            value={inputByOtherString}
+            onChange={(e) => handleByText(e)}
             InputProps={{
               style: {
                 color: "#E4D9E0",
@@ -177,7 +218,7 @@ function NavBar({ filterByName }) {
             }}
           />
         </Box>
-        <Box
+        {/* <Box
           sx={{
             width: "30%",
             maxWidth: "100%",
@@ -186,8 +227,11 @@ function NavBar({ filterByName }) {
         >
           <CssTextField
             fullWidth
-            label="Filter By Heigth"
-            id="filterByHeigth"
+            label={`Filter By ${
+              tableHead[3].toLowerCase()[0].toUpperCase() +
+              tableHead[3].toLowerCase().slice(1)
+            }`}
+            id={`${tableHead[3]}`}
             InputProps={{
               style: {
                 color: "#E4D9E0",
@@ -199,7 +243,53 @@ function NavBar({ filterByName }) {
               },
             }}
           />
-        </Box>
+        </Box> */}
+        <FormControl
+          sx={{
+            width: "30%",
+            maxWidth: "100%",
+            minWidth: "30%",
+          }}
+        >
+          <InputLabel
+            id="ascendingOrder"
+            sx={{
+              color: "white",
+            }}
+          >{`Order By ${
+            tableHead[4].toLowerCase()[0].toUpperCase() +
+            tableHead[4].toLowerCase().slice(1)
+          }`}</InputLabel>
+          <Select
+            labelId="ascendingOrder"
+            id={`${tableHead[4]}`}
+            value={ascendingOrder}
+            label={`Filter By ${
+              tableHead[4].toLowerCase()[0].toUpperCase() +
+              tableHead[4].toLowerCase().slice(1)
+            }`}
+            onChange={handleChangeOrder}
+            sx={{
+              color: "white",
+              ".MuiOutlinedInput-notchedOutline": {
+                borderColor: "rgba(228, 219, 233, 1)",
+              },
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "rgba(228, 219, 233, 1)",
+              },
+              "&:hover .MuiOutlinedInput-notchedOutline": {
+                borderColor: "rgba(228, 219, 233, 1)",
+              },
+              ".MuiSvgIcon-root ": {
+                fill: "white !important",
+              },
+            }}
+          >
+            <MenuItem value={"none"}>None</MenuItem>
+            <MenuItem value={"upward"}>Increasing Order</MenuItem>
+            <MenuItem value={"downward"}>Decreasing Order</MenuItem>
+          </Select>
+        </FormControl>
       </div>
       {/* <Autocomplete
         freeSolo

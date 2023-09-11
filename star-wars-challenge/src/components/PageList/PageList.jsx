@@ -8,28 +8,33 @@ import { Triangle } from "react-loader-spinner";
 import styles from "./PageList.module.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Pagination from "@/components/Pagination/Pagination";
-import getApiCharacter from "@/services/getApiCharacter";
+import getApiCharacter from "@/services/getApiCategory";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { Button } from "@mui/material";
+import Link from "next/link";
 
 export const PageListContext = createContext();
 
-function PageList({ category, getCategory, tableHead, getApi }) {
+function PageList({ category, getCategory, tableData, getApi }) {
   const [triangle, setTriangle] = useState(true);
   const pathName = usePathname().split("/")[1];
   const dispatch = useDispatch();
 
-  const dataList = useSelector((state) => state.peopleReducer[category]);
-  const [elements, setElements] = useState(dataList);
+  const dataList = useSelector((state) => state.storeReducer[category]);
+
   const [elementByName, setElementByName] = useState([]);
 
   const [characterExist, setCharacterExist] = useState(false);
   const [characterNoFound, setCharacterNoFound] = useState(false);
+  const [noName, setNoName] = useState(false);
   const handleOpenModalCharacterExist = () => setCharacterExist(true);
   const handleCloseModalCharacterExist = () => setCharacterExist(false);
   const handleOpenModalCharacterNoFound = () => setCharacterNoFound(true);
   const handleCloseModalCharacterNoFound = () => setCharacterNoFound(false);
+  const handleOpenNoName = () => setNoName(true);
+  const handleCloseNoName = () => setNoName(false);
 
   const style = {
     position: "absolute",
@@ -59,7 +64,7 @@ function PageList({ category, getCategory, tableHead, getApi }) {
   //}, [character, setTriangle]);
 
   const selectName = async (name) => {
-    if (name === "") return alert("Complete Character Name");
+    if (name === "") return handleOpenNoName();
 
     console.log(dataList, name);
     const nameContain = dataList?.find(
@@ -69,7 +74,8 @@ function PageList({ category, getCategory, tableHead, getApi }) {
 
     let elementByNameApi = await getApi(
       name,
-      `https://swapi.dev/api/${category}/?page=1&format=json`
+      `https://swapi.dev/api/${category}/?page=1&format=json`,
+      category
     );
 
     if (!elementByNameApi) return handleOpenModalCharacterNoFound();
@@ -80,11 +86,15 @@ function PageList({ category, getCategory, tableHead, getApi }) {
   useEffect(() => {
     dispatch(getCategory(elementByName));
     setTriangle(false);
-  }, [elementByName, getCategory]);
+  }, [elementByName]);
 
   return (
     <div className={styles.divContainerPageList}>
-      <h1>{pathName === "people" ? "Characters" : pathName}</h1>
+      <h1>
+        {pathName === "people"
+          ? "Characters"
+          : pathName[0].toUpperCase() + pathName.slice(1)}
+      </h1>
       {/* <NavBar
         category={dataList}
         selectName={selectName}
@@ -93,30 +103,42 @@ function PageList({ category, getCategory, tableHead, getApi }) {
       <Modal
         open={characterExist}
         onClose={handleCloseModalCharacterExist}
-        aria-labelledby="modal-modal-title"
+        aria-labelledby="characterExist"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            The character is included in the list
+          <Typography id="characterExist" variant="h6" component="h2">
+            {`The ${pathName} is included in the list`}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Try to add another character!
+            {`Try to add another ${pathName}!`}
           </Typography>
         </Box>
       </Modal>
       <Modal
         open={characterNoFound}
         onClose={handleCloseModalCharacterNoFound}
-        aria-labelledby="modal-modal-title"
+        aria-labelledby="characterNoFound"
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            The character Not Found
+          <Typography id="characterNoFound" variant="h6" component="h2">
+            {`The ${pathName} Not Found`}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Try to add another character!
+            {`Try to add another ${pathName}!`}
+          </Typography>
+        </Box>
+      </Modal>
+      <Modal
+        open={noName}
+        onClose={handleCloseNoName}
+        aria-labelledby="noName"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="noName" variant="h6" component="h2">
+            {`Complete the ${pathName} name`}
           </Typography>
         </Box>
       </Modal>
@@ -132,14 +154,30 @@ function PageList({ category, getCategory, tableHead, getApi }) {
           visible={true}
         />
       ) : (
-        <PageListContext.Provider value={{ selectName, tableHead }}>
-          <DataList
-            category={category}
-            tableHead={tableHead}
-            dataList={elements}
-          />
+        <PageListContext.Provider value={{ selectName, tableData }}>
+          <DataList category={category} tableData={tableData} />
         </PageListContext.Provider>
       )}
+      <Link href={"/"}>
+        <Button
+          variant="outlined"
+          sx={{
+            scale: "1.2",
+            margin: "1rem",
+            backgroundColor: "white",
+            color: "black",
+            "&:hover": {
+              backgroundColor: "#D3DAEE",
+              borderColor: "#0062cc",
+              boxShadow: "none",
+              color: "#32285B",
+              fontWeight: 700,
+            },
+          }}
+        >
+          Back
+        </Button>
+      </Link>
     </div>
   );
 }

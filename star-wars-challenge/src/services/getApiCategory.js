@@ -1,9 +1,10 @@
 import { peopleAdapter } from "./adapters/people.adapter";
+import { vehiclesAdapter } from "./adapters/vehicles.adapter";
 
-async function getApiCharacter(name, url) {
+async function getApiCategory(name, url, category) {
   let datosTotales;
   if (!url) return datosTotales;
-
+  console.log(category);
   let apiUrl = url;
 
   try {
@@ -14,10 +15,12 @@ async function getApiCharacter(name, url) {
     );
 
     if (datosTotales.length === 0) {
-      return getApiCharacter(name, datos.next); // URL de la siguiente página o null si no hay más páginas
+      return getApiCategory(name, datos.next, category); // URL de la siguiente página o null si no hay más páginas
     }
 
-    datosTotales = await peopleAdapter(datosTotales);
+    if (category === "people") datosTotales = await peopleAdapter(datosTotales);
+    if (category === "vehicles")
+      datosTotales = await vehiclesAdapter(datosTotales);
     console.log(datosTotales.length);
     console.log(datosTotales);
     return datosTotales;
@@ -26,4 +29,4 @@ async function getApiCharacter(name, url) {
   }
 }
 
-export default getApiCharacter;
+export default getApiCategory;

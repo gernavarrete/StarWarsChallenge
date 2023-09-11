@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Pagination from "@/components/Pagination/Pagination";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,51 +7,95 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
+import { dataFilter } from "@/redux-toolkit/features/peoples/storeSlice";
 
-function DataList({ category, tableHead, dataList, selectName }) {
-  //const dataList = useSelector((state) => state.peopleReducer[category]);
+function DataList({ category, tableData }) {
+  const dispatch = useDispatch();
+  const dataList = useSelector((state) => state.storeReducer[category]);
+  const dataFiltered = useSelector((state) => state.storeReducer.dataFilter);
   const [elements, setElements] = useState(dataList);
+  const { tableHead, titleTable } = tableData;
 
-  console.log(dataList);
-
-  const eyesColor =
-    tableHead[1].toLowerCase().split(/\s+/)[0].toLowerCase() +
-    tableHead[1].toLowerCase().split(/\s+/)[1][0].toUpperCase() +
-    tableHead[1].toLowerCase().split(/\s+/)[1].slice(1);
-
-  const hairColor =
-    tableHead[2].toLowerCase().split(/\s+/)[0].toLowerCase() +
-    tableHead[2].toLowerCase().split(/\s+/)[1][0].toUpperCase() +
-    tableHead[2].toLowerCase().split(/\s+/)[1].slice(1);
-
-  const skinColor =
-    tableHead[5].toLowerCase().split(/\s+/)[0].toLowerCase() +
-    tableHead[5].toLowerCase().split(/\s+/)[1][0].toUpperCase() +
-    tableHead[5].toLowerCase().split(/\s+/)[1].slice(1);
+  const keyUpperCase = (num) => {
+    const key =
+      tableHead[num].toLowerCase().split(/\s+/)[0].toLowerCase() +
+      tableHead[num].toLowerCase().split(/\s+/)[1][0].toUpperCase() +
+      tableHead[num].toLowerCase().split(/\s+/)[1].slice(1);
+    console.log(key);
+    return key; //de la forma eyesColor
+  };
 
   //console.log(eyesColor, hairColor, skinColor);
 
-  ///filter by name
+  ///filter by text and id pased
 
-  const filterByName = (nameValue) => {
-    if (!nameValue) {
-      setElements(dataList);
+  const [filterText, setFilterText] = useState("");
+  const [typeFilter, setTypeFilter] = useState("");
+
+  const handleFilterBytext = (text, typeFilter) => {
+    setFilterText(text);
+    setTypeFilter(typeFilter);
+  };
+
+  const filterByText = (filterText, typeFilter) => {
+    //console.log(filterText);
+    let elementsCache = [...dataList];
+    if (!filterText) {
+      return dispatch(dataFilter(dataList));
     } else {
-      let elementsCache = [...dataList];
-      elementsCache = elementsCache.filter((elementObj) =>
-        elementObj.name.toLowerCase().includes(nameValue.toLowerCase())
-      );
-
-      setElements(elementsCache);
+      //console.log(typeFilter);
+      if (typeFilter === "name") {
+        elementsCache = elementsCache.filter((elementObj) =>
+          elementObj.name.toLowerCase().includes(filterText.toLowerCase())
+        );
+      } else {
+        elementsCache = elementsCache.filter((elementObj) =>
+          elementObj[typeFilter]
+            .toLowerCase()
+            .includes(filterText.toLowerCase())
+        );
+      }
+      return dispatch(dataFilter(elementsCache));
     }
   };
 
   useEffect(() => {
-    //filterByName(inputFilterByName);
-    console.log("effect 62");
-  }, [elements, dataList]);
+    filterByText(filterText, typeFilter);
+  }, [filterText, typeFilter, dataList]);
+
+  ///// order by Prop const orderByProp = () => {
+
+  const [order, setOrder] = useState("");
+  /*const [propObj, setPropObj] = useState("");
+
+  const handleOrder = (typeOrder, prop) => {
+    setOrder(typeOrder);
+    setPropObj(prop);
+  }; */
+
+  const orderByProp = (typeOrder, prop) => {
+    let cache = [...dataList];
+    setOrder(typeOrder);
+    //console.log(typeOrder, prop);
+
+    if (typeOrder === "none") return dispatch(dataFilter(dataList));
+    // El metodo sort ordena segun el valor mayor, igual o menor que cero dependiendo la funcion comparadora
+    cache.sort((a, b) => {
+      if (parseInt(a[prop]) < parseInt(b[prop]))
+        return typeOrder === "upward" ? -1 : 1;
+      if (parseInt(a[prop]) > parseInt(b[prop]))
+        return typeOrder === "upward" ? 1 : -1;
+      return 0;
+    });
+    //console.log(cache);
+    dispatch(dataFilter(cache));
+  };
+
+  /* useEffect(() => {
+    orderByProp(order, propObj);
+  }, [order, propObj]); */
 
   ///// Pagination
 
@@ -63,26 +107,33 @@ function DataList({ category, tableHead, dataList, selectName }) {
 
   const handlePageNumber = (number) => {
     //Manejo del numero de pagina
-    console.log(number);
+    //console.log(number);
     setCurrentPage(number);
   };
 
   useEffect(() => {
     //Cambio de estado local de Total Recipes indicando los indices que tiene que renderizar en cada pagina
-    //console.log(currentPage);
-    setElements(dataList.slice(indexFirstPageRecipe(), indexLastPageRecipe()));
-    //console.log(peoples);
-    dataList && setNumberOfPage(Math.ceil(dataList.length / 9)); // cambiando el estado local de numeros de paginas a renderiza
-    //console.log(numberOfPage);
-  }, [currentPage, dataList, numberOfPage]);
+    //console.log(dataFiltered, indexFirstPageRecipe(), indexLastPageRecipe());
 
-  /* useEffect(() => {
+    dataFiltered &&
+      setElements(
+        dataFiltered.slice(indexFirstPageRecipe(), indexLastPageRecipe())
+      );
+
+    dataFiltered && setNumberOfPage(Math.ceil(dataFiltered.length / 9)); // cambiando el estado local de numeros de paginas a renderiza
+    //console.log(elements, numberOfPage);
+  }, [currentPage, dataList, dataFiltered]);
+
+  useEffect(() => {
     setCurrentPage(1); //setea el numero de pagina actual a 1 cuando recipesName Cambia
-  }, [nameFilter]); */
+  }, [order, filterText, dataFiltered]);
 
   return (
     <>
-      <NavBar filterByName={filterByName} />
+      <NavBar
+        handleFilterBytext={handleFilterBytext}
+        orderByProp={orderByProp}
+      />
       <TableContainer
         component={Paper}
         sx={{
@@ -94,7 +145,7 @@ function DataList({ category, tableHead, dataList, selectName }) {
           <TableHead>
             <TableRow>
               <TableCell key="namecharacter">
-                <b>Name Character</b>
+                <b>{titleTable}</b>
               </TableCell>
               {tableHead?.map((name, i) => (
                 <TableCell key={i} align="center">
@@ -113,44 +164,33 @@ function DataList({ category, tableHead, dataList, selectName }) {
                   {row.name}
                 </TableCell>
                 <TableCell align="center">
-                  {category === "people"
-                    ? row.physicalCharacteristics[
-                        tableHead[0].toLowerCase()
-                      ][0].toUpperCase() +
-                      row.physicalCharacteristics[
-                        tableHead[0].toLowerCase()
-                      ].slice(1)
-                    : row[tableHead[0].toLowerCase()][0].toUpperCase() +
-                      row[tableHead[0].toLowerCase()].slice(1)}
+                  {row[tableHead[0].toLowerCase()][0].toUpperCase() +
+                    row[tableHead[0].toLowerCase()].slice(1)}
                 </TableCell>
                 <TableCell align="center">
                   {category === "people"
-                    ? row.physicalCharacteristics[eyesColor][0].toUpperCase() +
-                      row.physicalCharacteristics[eyesColor].slice(1)
+                    ? row[keyUpperCase(1)][0].toUpperCase() +
+                      row[keyUpperCase(1)].slice(1)
                     : row[tableHead[1].toLowerCase()][0].toUpperCase() +
                       row[tableHead[1].toLowerCase()].slice(1)}
                 </TableCell>
                 <TableCell align="center">
                   {category === "people"
-                    ? row.physicalCharacteristics[hairColor][0].toUpperCase() +
-                      row.physicalCharacteristics[hairColor].slice(1)
-                    : row[tableHead[2].toLowerCase()][0].toUpperCase() +
-                      row[tableHead[2].toLowerCase()].slice(1)}
+                    ? row[keyUpperCase(2)][0].toUpperCase() +
+                      row[keyUpperCase(2)].slice(1)
+                    : row[keyUpperCase(2)][0].toUpperCase() +
+                      row[keyUpperCase(2)].slice(1)}
+                </TableCell>
+                <TableCell align="center">
+                  {row[tableHead[3].toLowerCase()]}
+                </TableCell>
+                <TableCell align="center">
+                  {row[tableHead[4].toLowerCase()]}
                 </TableCell>
                 <TableCell align="center">
                   {category === "people"
-                    ? row.physicalCharacteristics[tableHead[3].toLowerCase()]
-                    : row[tableHead[3].toLowerCase()]}
-                </TableCell>
-                <TableCell align="center">
-                  {category === "people"
-                    ? row.physicalCharacteristics[tableHead[4].toLowerCase()]
-                    : row[tableHead[4].toLowerCase()]}
-                </TableCell>
-                <TableCell align="center">
-                  {category === "people"
-                    ? row.physicalCharacteristics[skinColor][0].toUpperCase() +
-                      row.physicalCharacteristics[skinColor].slice(1)
+                    ? row[keyUpperCase(5)][0].toUpperCase() +
+                      row[keyUpperCase(5)].slice(1)
                     : row[tableHead[5].toLowerCase()][0].toUpperCase() +
                       row[tableHead[5].toLowerCase()].slice(1)}
                 </TableCell>

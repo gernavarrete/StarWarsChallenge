@@ -20,14 +20,13 @@ const mockups = [
       "https://swapi.dev/api/vehicles/44/",
       "https://swapi.dev/api/vehicles/46/",
     ],
-    physicalCharacteristics: {
-      gender: "male",
-      hairColor: "blond",
-      eyesColor: "blue",
-      skinColor: "fair",
-      height: "188",
-      mass: "84",
-    },
+
+    gender: "male",
+    hairColor: "blond",
+    eyesColor: "blue",
+    skinColor: "fair",
+    height: 188,
+    mass: 84,
   },
   {
     name: "Luke Skywalker",
@@ -48,14 +47,13 @@ const mockups = [
       "https://swapi.dev/api/vehicles/14/",
       "https://swapi.dev/api/vehicles/30/",
     ],
-    physicalCharacteristics: {
-      gender: "male",
-      hairColor: "blond",
-      eyesColor: "blue",
-      skinColor: "fair",
-      height: "172",
-      mass: "77",
-    },
+
+    gender: "male",
+    hairColor: "blond",
+    eyesColor: "blue",
+    skinColor: "fair",
+    height: 172,
+    mass: 77,
   },
   {
     name: "Anakin Skywalker",
@@ -76,14 +74,13 @@ const mockups = [
       "https://swapi.dev/api/vehicles/44/",
       "https://swapi.dev/api/vehicles/46/",
     ],
-    physicalCharacteristics: {
-      gender: "male",
-      hairColor: "blond",
-      eyesColor: "blue",
-      skinColor: "fair",
-      height: "188",
-      mass: "84",
-    },
+
+    gender: "male",
+    hairColor: "blond",
+    eyesColor: "blue",
+    skinColor: "fair",
+    height: 188,
+    mass: 84,
   },
   {
     name: "R5-D4",
@@ -93,14 +90,13 @@ const mockups = [
     starships: [],
     url: "https://swapi.dev/api/people/8/",
     vehicles: [],
-    physicalCharacteristics: {
-      gender: "n/a",
-      hairColor: "n/a",
-      eyesColor: "red",
-      skinColor: "white, red",
-      height: "97",
-      mass: "32",
-    },
+
+    gender: "n/a",
+    hairColor: "n/a",
+    eyesColor: "red",
+    skinColor: "white, red",
+    height: 97,
+    mass: 32,
   },
   {
     name: "Biggs Darklighter",
@@ -110,14 +106,13 @@ const mockups = [
     starships: ["https://swapi.dev/api/starships/12/"],
     url: "https://swapi.dev/api/people/9/",
     vehicles: [],
-    physicalCharacteristics: {
-      gender: "male",
-      hairColor: "black",
-      eyesColor: "brown",
-      skinColor: "light",
-      height: "183",
-      mass: "84",
-    },
+
+    gender: "male",
+    hairColor: "black",
+    eyesColor: "brown",
+    skinColor: "light",
+    height: 183,
+    mass: 84,
   },
   {
     name: "Biggs Darklighter",
@@ -127,14 +122,13 @@ const mockups = [
     starships: ["https://swapi.dev/api/starships/12/"],
     url: "https://swapi.dev/api/people/9/",
     vehicles: [],
-    physicalCharacteristics: {
-      gender: "male",
-      hairColor: "black",
-      eyesColor: "brown",
-      skinColor: "light",
-      height: "183",
-      mass: "84",
-    },
+
+    gender: "male",
+    hairColor: "black",
+    eyesColor: "brown",
+    skinColor: "light",
+    height: 183,
+    mass: 84,
   },
   {
     name: "R5-D4",
@@ -144,14 +138,13 @@ const mockups = [
     starships: [],
     url: "https://swapi.dev/api/people/8/",
     vehicles: [],
-    physicalCharacteristics: {
-      gender: "n/a",
-      hairColor: "n/a",
-      eyesColor: "red",
-      skinColor: "white, red",
-      height: "97",
-      mass: "32",
-    },
+
+    gender: "n/a",
+    hairColor: "n/a",
+    eyesColor: "red",
+    skinColor: "white, red",
+    height: 97,
+    mass: 32,
   },
   {
     name: "Biggs Darklighter",
@@ -161,14 +154,13 @@ const mockups = [
     starships: ["https://swapi.dev/api/starships/12/"],
     url: "https://swapi.dev/api/people/9/",
     vehicles: [],
-    physicalCharacteristics: {
-      gender: "male",
-      hairColor: "black",
-      eyesColor: "brown",
-      skinColor: "light",
-      height: "183",
-      mass: "84",
-    },
+
+    gender: "male",
+    hairColor: "black",
+    eyesColor: "brown",
+    skinColor: "light",
+    height: 183,
+    mass: 84,
   },
   {
     name: "Biggs Darklighter",
@@ -178,14 +170,13 @@ const mockups = [
     starships: ["https://swapi.dev/api/starships/12/"],
     url: "https://swapi.dev/api/people/9/",
     vehicles: [],
-    physicalCharacteristics: {
-      gender: "male",
-      hairColor: "black",
-      eyesColor: "brown",
-      skinColor: "light",
-      height: "183",
-      mass: "84",
-    },
+
+    gender: "male",
+    hairColor: "black",
+    eyesColor: "brown",
+    skinColor: "light",
+    height: 183,
+    mass: 84,
   },
   {
     name: "R5-D4",
@@ -195,14 +186,13 @@ const mockups = [
     starships: [],
     url: "https://swapi.dev/api/people/8/",
     vehicles: [],
-    physicalCharacteristics: {
-      gender: "n/a",
-      hairColor: "n/a",
-      eyesColor: "red",
-      skinColor: "white, red",
-      height: "97",
-      mass: "32",
-    },
+
+    gender: "n/a",
+    hairColor: "n/a",
+    eyesColor: "red",
+    skinColor: "white, red",
+    height: 97,
+    mass: 32,
   },
   {
     name: "Biggs Darklighter",
@@ -212,14 +202,13 @@ const mockups = [
     starships: ["https://swapi.dev/api/starships/12/"],
     url: "https://swapi.dev/api/people/9/",
     vehicles: [],
-    physicalCharacteristics: {
-      gender: "male",
-      hairColor: "black",
-      eyesColor: "brown",
-      skinColor: "light",
-      height: "183",
-      mass: "84",
-    },
+
+    gender: "male",
+    hairColor: "black",
+    eyesColor: "brown",
+    skinColor: "light",
+    height: 183,
+    mass: 84,
   },
   {
     name: "Biggs Darklighter",
@@ -229,14 +218,13 @@ const mockups = [
     starships: ["https://swapi.dev/api/starships/12/"],
     url: "https://swapi.dev/api/people/9/",
     vehicles: [],
-    physicalCharacteristics: {
-      gender: "male",
-      hairColor: "black",
-      eyesColor: "brown",
-      skinColor: "light",
-      height: "183",
-      mass: "84",
-    },
+
+    gender: "male",
+    hairColor: "black",
+    eyesColor: "brown",
+    skinColor: "light",
+    height: 183,
+    mass: 84,
   },
   {
     name: "R5-D4",
@@ -246,14 +234,13 @@ const mockups = [
     starships: [],
     url: "https://swapi.dev/api/people/8/",
     vehicles: [],
-    physicalCharacteristics: {
-      gender: "n/a",
-      hairColor: "n/a",
-      eyesColor: "red",
-      skinColor: "white, red",
-      height: "97",
-      mass: "32",
-    },
+
+    gender: "n/a",
+    hairColor: "n/a",
+    eyesColor: "red",
+    skinColor: "white, red",
+    height: 97,
+    mass: 32,
   },
   {
     name: "Biggs Darklighter",
@@ -263,14 +250,13 @@ const mockups = [
     starships: ["https://swapi.dev/api/starships/12/"],
     url: "https://swapi.dev/api/people/9/",
     vehicles: [],
-    physicalCharacteristics: {
-      gender: "male",
-      hairColor: "black",
-      eyesColor: "brown",
-      skinColor: "light",
-      height: "183",
-      mass: "84",
-    },
+
+    gender: "male",
+    hairColor: "black",
+    eyesColor: "brown",
+    skinColor: "light",
+    height: 183,
+    mass: 84,
   },
   {
     name: "Biggs Darklighter",
@@ -280,20 +266,19 @@ const mockups = [
     starships: ["https://swapi.dev/api/starships/12/"],
     url: "https://swapi.dev/api/people/9/",
     vehicles: [],
-    physicalCharacteristics: {
-      gender: "male",
-      hairColor: "black",
-      eyesColor: "brown",
-      skinColor: "light",
-      height: "183",
-      mass: "84",
-    },
+
+    gender: "male",
+    hairColor: "black",
+    eyesColor: "brown",
+    skinColor: "light",
+    height: 183,
+    mass: 84,
   },
 ];
 
 const initialState = {
-  people: mockups,
-  peoplePagination: [],
+  people: [],
+  dataFilter: [],
   films: [],
   species: [],
   vehicles: [],
@@ -301,7 +286,7 @@ const initialState = {
   planets: [],
 };
 
-export const peopleSlice = createSlice({
+export const storeSlice = createSlice({
   name: "storeGlobal",
   initialState,
   reducers: {
@@ -309,26 +294,34 @@ export const peopleSlice = createSlice({
       state.people = [...state.people, ...action.payload];
     },
     getFilms: (state, action) => {
-      state.films = action.payload;
+      state.films = [...state.films, ...action.payload];
     },
     getSpecies: (state, action) => {
-      state.species = action.payload;
+      state.species = [...state.species, ...action.payload];
     },
     getPlanets: (state, action) => {
-      state.planets = action.payload;
+      state.planets = [...state.planets, ...action.payload];
     },
     getVehicles: (state, action) => {
-      state.vehicles = action.payload;
+      state.vehicles = [...state.vehicles, ...action.payload];
     },
     getStarships: (state, action) => {
-      state.starships = action.payload;
+      state.starships = [...state.starships, ...action.payload];
     },
-    getPeoplePagination: (state, action) => {
-      state.peoplePagination = action.payload;
+    dataFilter: (state, action) => {
+      state.dataFilter = action.payload;
     },
   },
 });
 
-export const { getPeoples, getPeoplePagination } = peopleSlice.actions;
+export const {
+  getPeoples,
+  getVehicles,
+  getFilms,
+  getSpecies,
+  getPlanets,
+  getStarships,
+  dataFilter,
+} = storeSlice.actions;
 
-export default peopleSlice.reducer;
+export default storeSlice.reducer;

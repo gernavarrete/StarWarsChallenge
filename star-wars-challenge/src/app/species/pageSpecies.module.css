@@ -5,7 +5,7 @@
     align-items: center;
     position: fixed;
     object-fit: contain;
-    background: url('../../assets/media/bgcharacter.webp');
+    background: url('../../assets/media/bgspecies.webp');
     background-size: cover;
     background-repeat: no-repeat;
     width: 100%;
@@ -24,7 +24,7 @@
     top: 0;
     background:black;
     z-index: -1;
-    opacity: 0.5;
+    opacity: 0.6;
     mix-blend-mode: multiply;
   }
 

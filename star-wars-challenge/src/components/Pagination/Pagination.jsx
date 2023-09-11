@@ -1,8 +1,10 @@
 import s from "./Pagination.module.css";
 
-export default function Paginations(props) {
-  const { numberOfPage, currentPage, handlePageNumber } = props;
-
+export default function Paginations({
+  numberOfPage,
+  currentPage,
+  handlePageNumber,
+}) {
   const previousPage = currentPage - 1;
   const nextPage = currentPage + 1;
 

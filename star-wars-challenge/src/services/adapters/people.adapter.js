@@ -7,14 +7,12 @@ export function peopleAdapter(data) {
     starships: obj.starships,
     url: obj.url,
     vehicles: obj.vehicles,
-    physicalCharacteristics: {
-      gender: obj.gender,
-      hairColor: obj.hair_color,
-      eyesColor: obj.eye_color,
-      skinColor: obj.skin_color,
-      height: obj.height,
-      mass: obj.mass,
-    },
+    gender: obj.gender,
+    hairColor: obj.hair_color,
+    eyesColor: obj.eye_color,
+    skinColor: obj.skin_color,
+    height: obj.height,
+    mass: obj.mass,
   }));
 
   return dataAdapted;

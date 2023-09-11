@@ -3,28 +3,34 @@
 import PeopleList from "@/components/DataList/DataList";
 import { getPeoples } from "@/redux-toolkit/features/peoples/storeSlice";
 import getApiData from "@/services/getApiData";
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 import { Triangle } from "react-loader-spinner";
 import styles from "./pagePeople.module.css";
 import NavBar from "@/components/NavBar/NavBar";
 import Pagination from "../../components/Pagination/Pagination";
-import getApiCharacter from "@/services/getApiCharacter";
+import getApiCategory from "@/services/getApiCategory";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import PageList from "@/components/PageList/PageList";
 
 function People() {
-  const tableHead = [
-    "Gender",
-    "Eyes Color",
-    "Hair Color",
-    "Height",
-    "Mass",
-    "Skin Color",
-  ];
+  const pathName = usePathname().split("/")[1];
+  console.log(pathName);
+  const tableData = {
+    tableHead: [
+      "Gender",
+      "Eyes Color",
+      "Hair Color",
+      "Height",
+      "Mass",
+      "Skin Color",
+    ],
+    titleTable: "Name Character",
+  };
+
   /* const [triangle, setTriangle] = useState(true);
   const pathName = usePathname().split("/")[1];
   const dispatch = useDispatch();
@@ -130,12 +136,12 @@ function People() {
   //}, [nameFilter]);
 
   return (
-    <div className={styles.divContainerPeople}>
+    <div className={styles.divContainer}>
       <PageList
-        category={"people"}
+        category={pathName}
         getCategory={getPeoples}
-        tableHead={tableHead}
-        getApi={getApiCharacter}
+        tableData={tableData}
+        getApi={getApiCategory}
       />
     </div>
   );
