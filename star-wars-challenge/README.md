@@ -1,34 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Star Wars Explorer
 
-## Getting Started
+## Descripción
 
-First, run the development server:
+**Star Wars Explorer** es una Single Page Application (SPA) que te permite explorar el emocionante mundo de la saga Star Wars. Con esta aplicación, podrás consultar toda la información relacionada con tus personajes, naves, planetas y más, a través de una búsqueda por nombre fácil y rápida.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Características Destacadas
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Búsqueda por Nombre:** Encuentra rápidamente información detallada sobre tus personajes, naves, planetas y otros elementos de Star Wars simplemente ingresando su nombre en el campo de búsqueda.
+- **Detalles Completos:** Obtén datos completos y detallados sobre cada elemento de Star Wars, incluyendo su historia, apariciones en películas, características técnicas y mucho más.
+- **Interfaz Intuitiva:** La interfaz de usuario intuitiva y amigable facilita la navegación y búsqueda de información.
+- **Actualizaciones en Tiempo Real:** La aplicación se actualiza automáticamente con la información más reciente de la saga Star Wars, gracias a la API de Star Wars (https://swapi.dev/).
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Capturas de Pantalla
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+![Captura de pantalla 1](screenshot1.png)
+![Captura de pantalla 2](screenshot2.png)
 
-## Learn More
+## Instalación
 
-To learn more about Next.js, take a look at the following resources:
+1. Clona este repositorio: `git clone https://github.com/gernavarrete/StarWarsChallenge.git`
+2. Navega al directorio del proyecto: `cd star-wars-challenge`
+3. Abre `src/app/page.js` en tu navegador web.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Uso
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. En la pagina principal escoge la categoria por la cual deseas buscar.
+2. Luego utiliza el campo de búsqueda para ingresar el nombre del personaje, nave, planeta u otro elemento que desees consultar.
+3. Haz clic en el botón "Buscar" para ver los resultados.
+4. Haz clic en un elemento de la lista de resultados para obtener información detallada.
 
-## Deploy on Vercel
+## Tecnologías Utilizadas
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- HTML5
+- CSS3
+- JavaScript
+- React con Nextjs
+- API --> https://swapi.dev/
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Contribución
+
+Si deseas contribuir a este proyecto, sigue los siguientes pasos:
+
+1. Fork del repositorio.
+2. Crea una rama (`git checkout -b feature/nueva-funcionalidad`).
+3. Haz tus cambios y realiza un commit (`git commit -m 'Añade nueva funcionalidad'`).
+4. Push a la rama (`git push origin feature/nueva-funcionalidad`).
+5. Abre un Pull Request.
+
+## Créditos
+
+- Desarrollador: German Dario Navarrete
+- API de Star Wars: SWAPI The Star Wars API
+
+## Licencia
+
+Este proyecto está bajo la licencia GNU General Public License v3.0
+. Consulta el archivo [LICENSE.md](LICENSE.md) para obtener más detalles.
+
+---
