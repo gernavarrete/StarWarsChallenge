@@ -103,8 +103,7 @@ function DataList({ category, tableData }) {
   };
 
   useEffect(() => {
-    //Cambio de estado local de Total Recipes indicando los indices que tiene que renderizar en cada pagina
-    //console.log(dataFiltered, indexFirstPageRecipe(), indexLastPageRecipe());
+    
 
     dataFiltered &&
       setElements(
