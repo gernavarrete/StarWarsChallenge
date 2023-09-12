@@ -18,7 +18,7 @@ import PageList from "@/components/PageList/PageList";
 
 function People() {
   const pathName = usePathname().split("/")[1];
-  console.log(pathName);
+
   const tableData = {
     tableHead: [
       "Gender",

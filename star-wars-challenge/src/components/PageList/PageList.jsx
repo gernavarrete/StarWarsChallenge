@@ -1,18 +1,13 @@
 import DataList from "@/components/DataList/DataList";
-import { getPeoples } from "@/redux-toolkit/features/peoples/storeSlice";
-import getApiData from "@/services/getApiData";
 import { createContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { usePathname } from "next/navigation";
 import { Triangle } from "react-loader-spinner";
 import styles from "./PageList.module.css";
-import NavBar from "@/components/NavBar/NavBar";
-import Pagination from "@/components/Pagination/Pagination";
-import getApiCharacter from "@/services/getApiCategory";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import { Button } from "@mui/material";
+import { Button, CircularProgress } from "@mui/material";
 import Link from "next/link";
 
 export const PageListContext = createContext();
@@ -29,11 +24,14 @@ function PageList({ category, getCategory, tableData, getApi }) {
   const [characterExist, setCharacterExist] = useState(false);
   const [characterNoFound, setCharacterNoFound] = useState(false);
   const [noName, setNoName] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleOpenModalCharacterExist = () => setCharacterExist(true);
   const handleCloseModalCharacterExist = () => setCharacterExist(false);
   const handleOpenModalCharacterNoFound = () => setCharacterNoFound(true);
   const handleCloseModalCharacterNoFound = () => setCharacterNoFound(false);
   const handleOpenNoName = () => setNoName(true);
+  const handleOpenLoading = () => setNoName(true);
+  const handleCloseLoading = () => setNoName(true);
   const handleCloseNoName = () => setNoName(false);
 
   const style = {
@@ -66,11 +64,11 @@ function PageList({ category, getCategory, tableData, getApi }) {
   const selectName = async (name) => {
     if (name === "") return handleOpenNoName();
 
-    console.log(dataList, name);
     const nameContain = dataList?.find(
       (element) => element.name.toLowerCase() === name.toLowerCase()
     );
     if (nameContain !== undefined) return handleOpenModalCharacterExist();
+    setLoading(true);
 
     let elementByNameApi = await getApi(
       name,
@@ -78,9 +76,14 @@ function PageList({ category, getCategory, tableData, getApi }) {
       category
     );
 
-    if (!elementByNameApi) return handleOpenModalCharacterNoFound();
-    console.log(elementByNameApi);
-    setElementByName(elementByNameApi);
+    if (!elementByNameApi) {
+      setLoading(false);
+      handleOpenModalCharacterNoFound();
+    } else {
+      setElementByName(elementByNameApi);
+      setLoading(false);
+    }
+    //console.log(elementByNameApi);
   };
 
   useEffect(() => {
@@ -134,11 +137,24 @@ function PageList({ category, getCategory, tableData, getApi }) {
         open={noName}
         onClose={handleCloseNoName}
         aria-labelledby="noName"
-        aria-describedby="modal-modal-description"
+        aria-describedby="modal-modal-noName"
       >
         <Box sx={style}>
           <Typography id="noName" variant="h6" component="h2">
             {`Complete the ${pathName} name`}
+          </Typography>
+        </Box>
+      </Modal>
+      <Modal
+        open={loading}
+        //onClose={loading}
+        aria-labelledby="loading"
+        aria-describedby="modal-modal-loading"
+      >
+        <Box sx={style}>
+          <CircularProgress />
+          <Typography id="noName" variant="h6" component="h2">
+            {`Loading ${pathName} data...`}
           </Typography>
         </Box>
       </Modal>

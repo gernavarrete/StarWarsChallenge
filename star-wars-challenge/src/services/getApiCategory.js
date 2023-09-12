@@ -38,8 +38,8 @@ async function getApiCategory(name, url, category) {
     if (category === "planets")
       datosTotales = await planetsAdapter(datosTotales);
     if (category === "films") datosTotales = await filmsAdapter(datosTotales);
-    console.log(datosTotales.length);
-    console.log(datosTotales);
+    //console.log(datosTotales.length);
+    //console.log(datosTotales);
     return datosTotales;
   } catch (error) {
     console.error(`Error al obtener datos. Código de estado: ${error}`);
