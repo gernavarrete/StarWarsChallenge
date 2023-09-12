@@ -147,9 +147,9 @@ function DataList({ category, tableData }) {
                   <b>{name}</b>
                 </TableCell>
               ))}
-              <TableCell key={titleTable + "Details"} align="center">
+              {/* <TableCell key={titleTable + "Details"} align="center">
                 <b>Details </b>
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -209,14 +209,14 @@ function DataList({ category, tableData }) {
                         row[keyLowerCase(5)].slice(1)}
                   </TableCell>
                 ) : null}
-                <TableCell align="center">
+                {/* <TableCell align="center">
                   <Link
                     href={`/${category}/[id].js`}
                     as={`/${category}/${row.url.split("/")[5]}`}
                   >
                     view details
                   </Link>
-                </TableCell>
+                </TableCell> */}
               </TableRow>
             ))}
           </TableBody>
