@@ -14,11 +14,6 @@ async function getApiData(type) {
     } catch (error) {
       console.error(`Error al obtener datos. Código de estado: ${error}`);
     }
-
-    /* if (respuesta.status === 200) {
-    } else {
-      break;
-    } */
   }
 
   if (type === "people") {

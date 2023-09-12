@@ -8,7 +8,7 @@ import { vehiclesAdapter } from "./adapters/vehicles.adapter";
 async function getApiCategory(name, url, category) {
   let datosTotales;
   if (!url) return datosTotales;
-  //console.log(category, url);
+
   let apiUrl = url;
 
   try {
@@ -38,8 +38,7 @@ async function getApiCategory(name, url, category) {
     if (category === "planets")
       datosTotales = await planetsAdapter(datosTotales);
     if (category === "films") datosTotales = await filmsAdapter(datosTotales);
-    //console.log(datosTotales.length);
-    //console.log(datosTotales);
+
     return datosTotales;
   } catch (error) {
     console.error(`Error al obtener datos. Código de estado: ${error}`);
