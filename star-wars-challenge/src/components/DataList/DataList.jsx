@@ -7,10 +7,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import { dataFilter } from "@/redux-toolkit/features/peoples/storeSlice";
-import Link from "next/link";
 
 function DataList({ category, tableData }) {
   const dispatch = useDispatch();
@@ -45,12 +44,10 @@ function DataList({ category, tableData }) {
   };
 
   const filterByText = (filterText, typeFilter) => {
-    //console.log(filterText);
     let elementsCache = [...dataList];
     if (!filterText) {
       return dispatch(dataFilter(dataList));
     } else {
-      //console.log(typeFilter);
       if (typeFilter === "name") {
         elementsCache = elementsCache.filter((elementObj) =>
           elementObj.name.toLowerCase().includes(filterText.toLowerCase())
@@ -77,7 +74,6 @@ function DataList({ category, tableData }) {
   const orderByProp = (typeOrder, prop) => {
     let cache = [...dataList];
     setOrder(typeOrder);
-    //console.log(typeOrder, prop);
 
     if (typeOrder === "none") return dispatch(dataFilter(dataList));
     // El metodo sort ordena segun el valor mayor, igual o menor que cero dependiendo la funcion comparadora
@@ -88,7 +84,7 @@ function DataList({ category, tableData }) {
         return typeOrder === "upward" ? 1 : -1;
       return 0;
     });
-    //console.log(cache);
+
     dispatch(dataFilter(cache));
   };
 
@@ -102,7 +98,7 @@ function DataList({ category, tableData }) {
 
   const handlePageNumber = (number) => {
     //Manejo del numero de pagina
-    //console.log(number);
+
     setCurrentPage(number);
   };
 
@@ -116,7 +112,6 @@ function DataList({ category, tableData }) {
       );
 
     dataFiltered && setNumberOfPage(Math.ceil(dataFiltered.length / 9)); // cambiando el estado local de numeros de paginas a renderiza
-    //console.log(elements, numberOfPage);
   }, [currentPage, dataList, dataFiltered]);
 
   useEffect(() => {

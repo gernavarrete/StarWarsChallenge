@@ -46,21 +46,6 @@ function PageList({ category, getCategory, tableData, getApi }) {
     p: 4,
   };
 
-  //useEffect(() => {
-  //async function fetchData() {
-  //try {
-  //const data = await getApiData(pathName);
-  //setCharacters(data);
-  //dispatch(getPeoples(data));
-  //setTriangle(false);
-  //console.log("renderiza");
-  //} catch (error) {
-  //console.error("Error fetching data:", error);
-  //}
-  //}
-  //fetchData();
-  //}, [character, setTriangle]);
-
   const selectName = async (name) => {
     if (name === "") return handleOpenNoName();
 
@@ -83,7 +68,6 @@ function PageList({ category, getCategory, tableData, getApi }) {
       setElementByName(elementByNameApi);
       setLoading(false);
     }
-    //console.log(elementByNameApi);
   };
 
   useEffect(() => {
@@ -98,11 +82,6 @@ function PageList({ category, getCategory, tableData, getApi }) {
           ? "Characters"
           : pathName[0].toUpperCase() + pathName.slice(1)}
       </h1>
-      {/* <NavBar
-        category={dataList}
-        selectName={selectName}
-        filterByName={filterByName}
-      /> */}
       <Modal
         open={characterExist}
         onClose={handleCloseModalCharacterExist}
@@ -147,7 +126,6 @@ function PageList({ category, getCategory, tableData, getApi }) {
       </Modal>
       <Modal
         open={loading}
-        //onClose={loading}
         aria-labelledby="loading"
         aria-describedby="modal-modal-loading"
       >

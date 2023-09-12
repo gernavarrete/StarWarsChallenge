@@ -1,8 +1,8 @@
 "use client";
 
-import { TextField, Autocomplete, Button } from "@mui/material";
+import { TextField, Button } from "@mui/material";
 import style from "./NavBar.module.css";
-import { alpha, styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import FormControl from "@mui/material/FormControl";
 import { useContext, useEffect, useState } from "react";
@@ -56,20 +56,16 @@ function NavBar({ handleFilterBytext, orderByProp }) {
     if (e.target.id.toLowerCase() === "name") {
       setTypeFilter("name");
       setInputByName(e.target.value);
-      //handleFilterBytext(inputByName, e.target.id.toLowerCase());
     } else if (e.target.id.toLowerCase() === tableHead[0].toLowerCase()) {
       setTypeFilter(e.target.id.toLowerCase());
       setInputByOtherString(e.target.value);
-      //handleFilterBytext(inputByOtherString, e.target.id.toLowerCase());
     }
   };
 
   useEffect(() => {
     if (typeFilter === "name") {
-      //setInputByName(e.target.value)
       handleFilterBytext(inputByName, typeFilter);
     } else if (typeFilter === tableHead[0].toLowerCase()) {
-      //setInputByOtherString(e.target.value)
       handleFilterBytext(inputByOtherString, typeFilter);
     }
   }, [inputByName, inputByOtherString, typeFilter]);
@@ -135,31 +131,6 @@ function NavBar({ handleFilterBytext, orderByProp }) {
         </Button>
       </Box>
 
-      {/* <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options={categoryOptions}
-        sx={{ width: 300, marginY: "1rem" }}
-        renderInput={(params) => (
-          <CssTextField
-            {...params}
-            label="Search Character"
-            InputProps={{
-              ...params.InputProps,
-              type: "text",
-              style: {
-                color: "#E4D9E0",
-              },
-            }}
-            InputLabelProps={{
-              style: {
-                color: "#E4D9E0",
-              },
-            }}
-          />
-        )}
-        onChange={(e, value) => handleClick(e, value)}
-      /> */}
       <div className={style.divContainerFilter}>
         <Box
           sx={{
@@ -218,32 +189,6 @@ function NavBar({ handleFilterBytext, orderByProp }) {
             }}
           />
         </Box>
-        {/* <Box
-          sx={{
-            width: "30%",
-            maxWidth: "100%",
-            minWidth: "30%",
-          }}
-        >
-          <CssTextField
-            fullWidth
-            label={`Filter By ${
-              tableHead[3].toLowerCase()[0].toUpperCase() +
-              tableHead[3].toLowerCase().slice(1)
-            }`}
-            id={`${tableHead[3]}`}
-            InputProps={{
-              style: {
-                color: "#E4D9E0",
-              },
-            }}
-            InputLabelProps={{
-              style: {
-                color: "#E4D9E0",
-              },
-            }}
-          />
-        </Box> */}
         {tableHead[4] ? (
           <FormControl
             sx={{
@@ -293,31 +238,6 @@ function NavBar({ handleFilterBytext, orderByProp }) {
           </FormControl>
         ) : null}
       </div>
-      {/* <Autocomplete
-        freeSolo
-        id="free-solo-2-demo"
-        options={categoryOptions}
-        renderInput={(params) => (
-          <CssTextField
-            {...params}
-            label="Search input"
-            InputProps={{
-              ...params.InputProps,
-              type: "search",
-              style: {
-                color: "#E4D9E0",
-              },
-            }}
-            InputLabelProps={{
-              ...params.InputLabelProps,
-              style: {
-                color: "#E4D9E0",
-              },
-            }}
-          />
-        )}
-        onChange={(e, value) => handleClick(e, value)}
-      /> */}
     </div>
   );
 }
