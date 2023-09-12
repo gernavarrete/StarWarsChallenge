@@ -24,10 +24,11 @@
 
 ## Uso
 
-1. En la pagina principal escoge la categoria por la cual deseas buscar.
-2. Luego utiliza el campo de búsqueda para ingresar el nombre del personaje, nave, planeta u otro elemento que desees consultar.
-3. Haz clic en el botón "Buscar" para ver los resultados.
-4. Haz clic en un elemento de la lista de resultados para obtener información detallada.
+1. Ingresa a la web https://starwarschallenge.vercel.app/
+2. En la pagina principal escoge la categoria por la cual deseas buscar.
+3. Luego utiliza el campo de búsqueda para ingresar el nombre del personaje, nave, planeta u otro elemento que desees consultar.
+4. Haz clic en el botón "Buscar" para ver los resultados.
+5. Haz clic en un elemento de la lista de resultados para obtener información detallada.
 
 ## Tecnologías Utilizadas
 
