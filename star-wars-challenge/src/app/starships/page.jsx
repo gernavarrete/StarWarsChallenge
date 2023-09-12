@@ -1,6 +1,6 @@
 "use client";
 
-import { getVehicles } from "@/redux-toolkit/features/peoples/storeSlice";
+import { getStarships } from "@/redux-toolkit/features/peoples/storeSlice";
 import styles from "./pageStarships.module.css";
 import getApiCategory from "@/services/getApiCategory";
 import PageList from "@/components/PageList/PageList";
@@ -8,24 +8,24 @@ import { usePathname } from "next/navigation";
 
 function Vehicles() {
   const pathName = usePathname().split("/")[1];
-  console.log(pathName);
+
   const tableData = {
     tableHead: [
       "Model",
       "Passengers",
-      "Vehicle Class",
-      "Length",
+      "Starship Class",
       "Crew",
+      "Length",
       "Manufacturer",
     ],
-    titleTable: "Name Vehicles",
+    titleTable: "Name Starships",
   };
 
   return (
     <div className={styles.divContainer}>
       <PageList
         category={pathName}
-        getCategory={getVehicles}
+        getCategory={getStarships}
         tableData={tableData}
         getApi={getApiCategory}
       />

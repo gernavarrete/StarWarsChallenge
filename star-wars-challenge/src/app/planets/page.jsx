@@ -12,12 +12,12 @@ function Planets() {
 
   const tableData = {
     tableHead: [
-      "Model",
-      "Passengers",
-      "Vehicle Class",
-      "Length",
-      "Crew",
-      "Manufacturer",
+      "Terrain",
+      "Diameter",
+      "Climate",
+      "Gravity",
+      "Population",
+      "Surface Water",
     ],
     titleTable: "Name Planets",
   };

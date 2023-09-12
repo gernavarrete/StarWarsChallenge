@@ -10,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import { useContext, useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import { dataFilter } from "@/redux-toolkit/features/peoples/storeSlice";
+import Link from "next/link";
 
 function DataList({ category, tableData }) {
   const dispatch = useDispatch();
@@ -23,11 +24,15 @@ function DataList({ category, tableData }) {
       tableHead[num].toLowerCase().split(/\s+/)[0].toLowerCase() +
       tableHead[num].toLowerCase().split(/\s+/)[1][0].toUpperCase() +
       tableHead[num].toLowerCase().split(/\s+/)[1].slice(1);
-    console.log(key);
+    console.log("keyUpperCase", num, key);
     return key; //de la forma eyesColor
   };
 
-  //console.log(eyesColor, hairColor, skinColor);
+  const keyLowerCase = (num) => {
+    const key = tableHead[num].toLowerCase();
+    console.log(num, key);
+    return key;
+  };
 
   ///filter by text and id pased
 
@@ -68,12 +73,6 @@ function DataList({ category, tableData }) {
   ///// order by Prop const orderByProp = () => {
 
   const [order, setOrder] = useState("");
-  /*const [propObj, setPropObj] = useState("");
-
-  const handleOrder = (typeOrder, prop) => {
-    setOrder(typeOrder);
-    setPropObj(prop);
-  }; */
 
   const orderByProp = (typeOrder, prop) => {
     let cache = [...dataList];
@@ -92,10 +91,6 @@ function DataList({ category, tableData }) {
     //console.log(cache);
     dispatch(dataFilter(cache));
   };
-
-  /* useEffect(() => {
-    orderByProp(order, propObj);
-  }, [order, propObj]); */
 
   ///// Pagination
 
@@ -144,7 +139,7 @@ function DataList({ category, tableData }) {
         <Table sx={{ minWidth: 500 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell key="namecharacter">
+              <TableCell key={titleTable + "titleTable"}>
                 <b>{titleTable}</b>
               </TableCell>
               {tableHead?.map((name, i) => (
@@ -152,6 +147,9 @@ function DataList({ category, tableData }) {
                   <b>{name}</b>
                 </TableCell>
               ))}
+              <TableCell key={titleTable + "Details"} align="center">
+                <b>Details </b>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -163,36 +161,61 @@ function DataList({ category, tableData }) {
                 <TableCell component="th" scope="row">
                   {row.name}
                 </TableCell>
+                {tableHead[0] ? (
+                  <TableCell align="center">
+                    {row[keyLowerCase(0)][0].toUpperCase() +
+                      row[keyLowerCase(0)].slice(1)}
+                  </TableCell>
+                ) : null}
+                {tableHead[1] ? (
+                  <TableCell align="center">
+                    {/\s/.test(tableHead[1])
+                      ? row[keyUpperCase(1)][0].toUpperCase() +
+                        row[keyUpperCase(1)].slice(1)
+                      : row[keyLowerCase(1)][0].toUpperCase() +
+                        row[keyLowerCase(1)].slice(1)}
+                  </TableCell>
+                ) : null}
+                {tableHead[2] ? (
+                  <TableCell align="center">
+                    {/\s/.test(tableHead[2])
+                      ? row[keyUpperCase(2)][0].toUpperCase() +
+                        row[keyUpperCase(2)].slice(1)
+                      : row[keyLowerCase(2)][0].toUpperCase() +
+                        row[keyLowerCase(2)].slice(1)}
+                  </TableCell>
+                ) : null}
+                {tableHead[3] ? (
+                  <TableCell align="center">
+                    {/\s/.test(tableHead[3])
+                      ? row[keyUpperCase(3)]
+                      : row[keyLowerCase(3)]}
+                  </TableCell>
+                ) : null}
+                {tableHead[4] ? (
+                  <TableCell align="center">
+                    {/\s/.test(tableHead[4])
+                      ? row[keyUpperCase(4)][0].toUpperCase() +
+                        row[keyUpperCase(4)].slice(1)
+                      : row[keyLowerCase(4)]}
+                  </TableCell>
+                ) : null}
+                {tableHead[5] ? (
+                  <TableCell align="center">
+                    {/\s/.test(tableHead[5])
+                      ? row[keyUpperCase(5)][0].toUpperCase() +
+                        row[keyUpperCase(5)].slice(1)
+                      : row[keyLowerCase(5)][0].toUpperCase() +
+                        row[keyLowerCase(5)].slice(1)}
+                  </TableCell>
+                ) : null}
                 <TableCell align="center">
-                  {row[tableHead[0].toLowerCase()][0].toUpperCase() +
-                    row[tableHead[0].toLowerCase()].slice(1)}
-                </TableCell>
-                <TableCell align="center">
-                  {category === "people"
-                    ? row[keyUpperCase(1)][0].toUpperCase() +
-                      row[keyUpperCase(1)].slice(1)
-                    : row[tableHead[1].toLowerCase()][0].toUpperCase() +
-                      row[tableHead[1].toLowerCase()].slice(1)}
-                </TableCell>
-                <TableCell align="center">
-                  {category === "people"
-                    ? row[keyUpperCase(2)][0].toUpperCase() +
-                      row[keyUpperCase(2)].slice(1)
-                    : row[keyUpperCase(2)][0].toUpperCase() +
-                      row[keyUpperCase(2)].slice(1)}
-                </TableCell>
-                <TableCell align="center">
-                  {row[tableHead[3].toLowerCase()]}
-                </TableCell>
-                <TableCell align="center">
-                  {row[tableHead[4].toLowerCase()]}
-                </TableCell>
-                <TableCell align="center">
-                  {category === "people"
-                    ? row[keyUpperCase(5)][0].toUpperCase() +
-                      row[keyUpperCase(5)].slice(1)
-                    : row[tableHead[5].toLowerCase()][0].toUpperCase() +
-                      row[tableHead[5].toLowerCase()].slice(1)}
+                  <Link
+                    href={`/${category}/[id].js`}
+                    as={`/${category}/${row.url.split("/")[5]}`}
+                  >
+                    view details
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}

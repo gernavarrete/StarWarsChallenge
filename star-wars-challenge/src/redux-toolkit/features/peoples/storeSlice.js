@@ -284,6 +284,7 @@ const initialState = {
   vehicles: [],
   starships: [],
   planets: [],
+  dataCharacter: null,
 };
 
 export const storeSlice = createSlice({
@@ -311,6 +312,9 @@ export const storeSlice = createSlice({
     dataFilter: (state, action) => {
       state.dataFilter = action.payload;
     },
+    getDataCharacter: (state, action) => {
+      state.dataCharacter = action.payload;
+    },
   },
 });
 
@@ -322,6 +326,7 @@ export const {
   getPlanets,
   getStarships,
   dataFilter,
+  getDataCharacter,
 } = storeSlice.actions;
 
 export default storeSlice.reducer;

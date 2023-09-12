@@ -244,52 +244,54 @@ function NavBar({ handleFilterBytext, orderByProp }) {
             }}
           />
         </Box> */}
-        <FormControl
-          sx={{
-            width: "30%",
-            maxWidth: "100%",
-            minWidth: "30%",
-          }}
-        >
-          <InputLabel
-            id="ascendingOrder"
+        {tableHead[4] ? (
+          <FormControl
             sx={{
-              color: "white",
-            }}
-          >{`Order By ${
-            tableHead[4].toLowerCase()[0].toUpperCase() +
-            tableHead[4].toLowerCase().slice(1)
-          }`}</InputLabel>
-          <Select
-            labelId="ascendingOrder"
-            id={`${tableHead[4]}`}
-            value={ascendingOrder}
-            label={`Filter By ${
-              tableHead[4].toLowerCase()[0].toUpperCase() +
-              tableHead[4].toLowerCase().slice(1)
-            }`}
-            onChange={handleChangeOrder}
-            sx={{
-              color: "white",
-              ".MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgba(228, 219, 233, 1)",
-              },
-              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgba(228, 219, 233, 1)",
-              },
-              "&:hover .MuiOutlinedInput-notchedOutline": {
-                borderColor: "rgba(228, 219, 233, 1)",
-              },
-              ".MuiSvgIcon-root ": {
-                fill: "white !important",
-              },
+              width: "30%",
+              maxWidth: "100%",
+              minWidth: "30%",
             }}
           >
-            <MenuItem value={"none"}>None</MenuItem>
-            <MenuItem value={"upward"}>Increasing Order</MenuItem>
-            <MenuItem value={"downward"}>Decreasing Order</MenuItem>
-          </Select>
-        </FormControl>
+            <InputLabel
+              id="ascendingOrder"
+              sx={{
+                color: "white",
+              }}
+            >{`Order By ${
+              tableHead[4].toLowerCase()[0].toUpperCase() +
+              tableHead[4].toLowerCase().slice(1)
+            }`}</InputLabel>
+            <Select
+              labelId="ascendingOrder"
+              id={`${tableHead[4]}`}
+              value={ascendingOrder}
+              label={`Filter By ${
+                tableHead[4].toLowerCase()[0].toUpperCase() +
+                tableHead[4].toLowerCase().slice(1)
+              }`}
+              onChange={handleChangeOrder}
+              sx={{
+                color: "white",
+                ".MuiOutlinedInput-notchedOutline": {
+                  borderColor: "rgba(228, 219, 233, 1)",
+                },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "rgba(228, 219, 233, 1)",
+                },
+                "&:hover .MuiOutlinedInput-notchedOutline": {
+                  borderColor: "rgba(228, 219, 233, 1)",
+                },
+                ".MuiSvgIcon-root ": {
+                  fill: "white !important",
+                },
+              }}
+            >
+              <MenuItem value={"none"}>None</MenuItem>
+              <MenuItem value={"upward"}>Increasing Order</MenuItem>
+              <MenuItem value={"downward"}>Decreasing Order</MenuItem>
+            </Select>
+          </FormControl>
+        ) : null}
       </div>
       {/* <Autocomplete
         freeSolo
