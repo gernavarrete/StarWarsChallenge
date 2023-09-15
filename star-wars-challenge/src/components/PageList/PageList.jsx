@@ -9,6 +9,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { Button, CircularProgress } from "@mui/material";
 import Link from "next/link";
+import { getNameAutocomplete } from "@/redux-toolkit/features/peoples/storeSlice";
+import getApiData from "@/services/getApiData";
 
 export const PageListContext = createContext();
 
@@ -74,6 +76,16 @@ function PageList({ category, getCategory, tableData, getApi }) {
     dispatch(getCategory(elementByName));
     setTriangle(false);
   }, [elementByName]);
+
+  useEffect(() => {
+    console.log("buscando names");
+    async function getApiNames(category) {
+      const names = await getApiData(category);
+      dispatch(getNameAutocomplete(names));
+    }
+
+    getApiNames(pathName);
+  }, []);
 
   return (
     <div className={styles.divContainerPageList}>

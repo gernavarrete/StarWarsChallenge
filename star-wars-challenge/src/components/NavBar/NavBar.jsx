@@ -1,6 +1,6 @@
 "use client";
 
-import { TextField, Button } from "@mui/material";
+import { TextField, Button, Autocomplete } from "@mui/material";
 import style from "./NavBar.module.css";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -10,6 +10,7 @@ import { PageListContext } from "../PageList/PageList";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
+import { useSelector } from "react-redux";
 
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -43,6 +44,9 @@ function NavBar({ handleFilterBytext, orderByProp }) {
   const [ascendingOrder, setAscendingOrder] = useState("");
   const { selectName, tableData } = useContext(PageListContext);
   const { tableHead } = tableData;
+  const dataNames = useSelector(
+    (state) => state.storeReducer.namesAutocomplete
+  );
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -76,17 +80,20 @@ function NavBar({ handleFilterBytext, orderByProp }) {
   };
 
   useEffect(() => {
-    orderByProp(ascendingOrder, tableHead[3].toLowerCase());
+    orderByProp(ascendingOrder, tableHead[4].toLowerCase());
   }, [ascendingOrder]);
 
   return (
     <div className={style.divContainerNavBar}>
-      <Box
+      {/* <Box
         sx={{
           display: "flex",
           width: "40%",
           maxWidth: "100%",
           minWidth: "30%",
+          "@media(width < 780px)": {
+            width: "100%",
+          },
         }}
         component="form"
         onSubmit={handleSearch}
@@ -129,14 +136,102 @@ function NavBar({ handleFilterBytext, orderByProp }) {
           {" "}
           Search
         </Button>
+      </Box> */}
+      <Box
+        sx={{
+          display: "flex",
+          width: "40%",
+          maxWidth: "100%",
+          minWidth: "30%",
+          "@media(width < 780px)": {
+            width: "100%",
+          },
+        }}
+        component="form"
+        onSubmit={handleSearch}
+      >
+        <Autocomplete
+          freeSolo
+          id="free-solo-2-demo"
+          disableClearable
+          options={dataNames}
+          sx={{ width: 300, marginY: "1rem" }}
+          renderInput={(params) => (
+            <CssTextField
+              {...params}
+              label="Search Character"
+              InputProps={{
+                ...params.InputProps,
+                type: "text",
+                style: {
+                  color: "#E4D9E0",
+                },
+              }}
+              InputLabelProps={{
+                style: {
+                  color: "#E4D9E0",
+                },
+              }}
+            />
+          )}
+          onChange={(e, value) => (!value ? "" : setName(value))}
+        />
+        <Button
+          type="submit"
+          variant="outline"
+          sx={{
+            width: "20%",
+            height: "60%",
+            marginTop: "1rem",
+            marginLeft: "1rem",
+            border: "1px solid white",
+            "&:hover": {
+              backgroundColor: "#D3DAEE",
+              borderColor: "#0062cc",
+              boxShadow: "none",
+              color: "#32285B",
+              fontWeight: 700,
+            },
+          }}
+        >
+          {" "}
+          Search
+        </Button>
       </Box>
-
+      {/* <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={categoryOptions}
+        sx={{ width: 300, marginY: "1rem" }}
+        renderInput={(params) => (
+          <CssTextField
+            {...params}
+            label="Search Character"
+            InputProps={{
+              ...params.InputProps,
+              type: "text",
+              style: {
+                color: "#E4D9E0",
+              },
+            }}
+            InputLabelProps={{
+              style: {
+                color: "#E4D9E0",
+              },
+            }}
+          />
+        )}
+        onChange={(e, value) => handleClick(e, value)}
+      /> */}
       <div className={style.divContainerFilter}>
         <Box
           sx={{
             width: "30%",
             maxWidth: "100%",
             minWidth: "30%",
+            "@media(width < 780px)": {
+              width: "100%",
+            },
           }}
           //onChange={(e) => handleByText(e)}
         >
@@ -164,6 +259,9 @@ function NavBar({ handleFilterBytext, orderByProp }) {
             width: "30%",
             maxWidth: "100%",
             minWidth: "30%",
+            "@media(width < 780px)": {
+              width: "100%",
+            },
           }}
           //onChange={handleByText}
         >
@@ -195,6 +293,9 @@ function NavBar({ handleFilterBytext, orderByProp }) {
               width: "30%",
               maxWidth: "100%",
               minWidth: "30%",
+              "@media(width < 780px)": {
+                width: "100%",
+              },
             }}
           >
             <InputLabel

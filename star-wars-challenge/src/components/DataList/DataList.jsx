@@ -23,13 +23,13 @@ function DataList({ category, tableData }) {
       tableHead[num].toLowerCase().split(/\s+/)[0].toLowerCase() +
       tableHead[num].toLowerCase().split(/\s+/)[1][0].toUpperCase() +
       tableHead[num].toLowerCase().split(/\s+/)[1].slice(1);
-    console.log("keyUpperCase", num, key);
+    //console.log("keyUpperCase", num, key);
     return key; //de la forma eyesColor
   };
 
   const keyLowerCase = (num) => {
     const key = tableHead[num].toLowerCase();
-    console.log(num, key);
+    //console.log(num, key);
     return key;
   };
 
@@ -74,7 +74,7 @@ function DataList({ category, tableData }) {
   const orderByProp = (typeOrder, prop) => {
     let cache = [...dataList];
     setOrder(typeOrder);
-
+    console.log(typeOrder, prop, "line 77");
     if (typeOrder === "none") return dispatch(dataFilter(dataList));
     // El metodo sort ordena segun el valor mayor, igual o menor que cero dependiendo la funcion comparadora
     cache.sort((a, b) => {
@@ -103,8 +103,6 @@ function DataList({ category, tableData }) {
   };
 
   useEffect(() => {
-    
-
     dataFiltered &&
       setElements(
         dataFiltered.slice(indexFirstPageRecipe(), indexLastPageRecipe())
@@ -128,6 +126,9 @@ function DataList({ category, tableData }) {
         sx={{
           width: "80%",
           heigth: "auto",
+          "@media(width < 780px)": {
+            width: "100%",
+          },
         }}
       >
         <Table sx={{ minWidth: 500 }} aria-label="simple table">

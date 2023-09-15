@@ -279,6 +279,7 @@ const mockups = [
 const initialState = {
   people: [],
   dataFilter: [],
+  namesAutocomplete: [],
   films: [],
   species: [],
   vehicles: [],
@@ -315,6 +316,9 @@ export const storeSlice = createSlice({
     getDataCharacter: (state, action) => {
       state.dataCharacter = action.payload;
     },
+    getNameAutocomplete: (state, action) => {
+      state.namesAutocomplete = action.payload;
+    },
   },
 });
 
@@ -327,6 +331,7 @@ export const {
   getStarships,
   dataFilter,
   getDataCharacter,
+  getNameAutocomplete,
 } = storeSlice.actions;
 
 export default storeSlice.reducer;

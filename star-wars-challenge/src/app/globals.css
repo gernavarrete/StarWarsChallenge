@@ -35,3 +35,19 @@ body {
   opacity: 0.8;
   mix-blend-mode:multiply;
 } */
+
+
+@media (width < 780px) {
+  body {
+    font: 24px;
+    height: auto;
+    max-width: 100vw;
+    color:aliceblue;
+    /* background: url('../assets/media/supernovaexplosion0.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    z-index: -3; */
+    
+  }
+}
