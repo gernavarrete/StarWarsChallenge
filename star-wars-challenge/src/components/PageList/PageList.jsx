@@ -85,6 +85,9 @@ function PageList({ category, getCategory, tableData, getApi }) {
     }
 
     getApiNames(pathName);
+    return () => {
+      dispatch(getNameAutocomplete([]));
+    };
   }, []);
 
   return (

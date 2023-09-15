@@ -11,6 +11,7 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import { useSelector } from "react-redux";
+import { usePathname } from "next/navigation";
 
 const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
@@ -37,6 +38,7 @@ const CssTextField = styled(TextField)({
 });
 
 function NavBar({ handleFilterBytext, orderByProp }) {
+  const pathName = usePathname().split("/")[1];
   const [name, setName] = useState("");
   const [inputByName, setInputByName] = useState("");
   const [inputByOtherString, setInputByOtherString] = useState("");
@@ -80,7 +82,9 @@ function NavBar({ handleFilterBytext, orderByProp }) {
   };
 
   useEffect(() => {
-    orderByProp(ascendingOrder, tableHead[4].toLowerCase());
+    if (pathName === "films")
+      orderByProp(ascendingOrder, tableHead[2].toLowerCase());
+    else orderByProp(ascendingOrder, tableHead[4].toLowerCase());
   }, [ascendingOrder]);
 
   return (
@@ -153,7 +157,6 @@ function NavBar({ handleFilterBytext, orderByProp }) {
         <Autocomplete
           freeSolo
           id="free-solo-2-demo"
-          disableClearable
           options={dataNames}
           sx={{ width: 300, marginY: "1rem" }}
           renderInput={(params) => (
