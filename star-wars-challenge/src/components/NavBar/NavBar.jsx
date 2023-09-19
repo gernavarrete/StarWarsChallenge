@@ -53,7 +53,7 @@ function NavBar({ handleFilterBytext, orderByProp }) {
   const handleSearch = (e) => {
     e.preventDefault();
     selectName(name);
-    setName("");
+    //setName("");
   };
 
   const handleByText = (e) => {
