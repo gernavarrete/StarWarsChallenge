@@ -162,7 +162,7 @@ function NavBar({ handleFilterBytext, orderByProp }) {
           renderInput={(params) => (
             <CssTextField
               {...params}
-              label="Search Character"
+              label={pathName === 'people' ? "Search Character" : `Search ${pathName[0].toUpperCase() + pathName.slice(1)}`}
               InputProps={{
                 ...params.InputProps,
                 type: "text",
