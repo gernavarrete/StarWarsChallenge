@@ -9,13 +9,16 @@ async function getApiCategory(name, url, category) {
   let datosTotales;
   if (!url) return datosTotales;
 
-  let apiUrl = url;
+  let apiUrl = url + `?search=${name}`;
 
   try {
     const respuesta = await fetch(apiUrl);
     const datos = await respuesta.json();
+    datosTotales = datos.results;
 
-    if (category === "films")
+    console.log(datosTotales);
+
+    /* if (category === "films")
       datosTotales = datos.results?.filter(
         (character) => character.title.toLowerCase() === name.toLowerCase()
       );
@@ -26,7 +29,7 @@ async function getApiCategory(name, url, category) {
 
     if (datosTotales.length === 0) {
       return getApiCategory(name, datos.next, category); // URL de la siguiente página o null si no hay más páginas
-    }
+    } */
 
     if (category === "people") datosTotales = await peopleAdapter(datosTotales);
     if (category === "vehicles")

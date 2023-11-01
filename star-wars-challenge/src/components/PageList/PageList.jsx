@@ -51,15 +51,15 @@ function PageList({ category, getCategory, tableData, getApi }) {
   const selectName = async (name) => {
     if (name === "") return handleOpenNoName();
 
-    const nameContain = dataList?.find(
-      (element) => element.name.toLowerCase() === name.toLowerCase()
+    const nameContain = dataList?.find((element) =>
+      element.name.toLowerCase().includes(name.toLowerCase())
     );
     if (nameContain !== undefined) return handleOpenModalCharacterExist();
     setLoading(true);
 
     let elementByNameApi = await getApi(
       name,
-      `https://swapi.dev/api/${category}/?page=1&format=json`,
+      `https://swapi.dev/api/${category}/`,
       category
     );
 

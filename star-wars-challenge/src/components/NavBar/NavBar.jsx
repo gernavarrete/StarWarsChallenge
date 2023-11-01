@@ -89,7 +89,7 @@ function NavBar({ handleFilterBytext, orderByProp }) {
 
   return (
     <div className={style.divContainerNavBar}>
-      {/* <Box
+      <Box
         sx={{
           display: "flex",
           width: "40%",
@@ -140,8 +140,8 @@ function NavBar({ handleFilterBytext, orderByProp }) {
           {" "}
           Search
         </Button>
-      </Box> */}
-      <Box
+      </Box>
+      {/* <Box
         sx={{
           display: "flex",
           width: "40%",
@@ -200,7 +200,7 @@ function NavBar({ handleFilterBytext, orderByProp }) {
           {" "}
           Search
         </Button>
-      </Box>
+      </Box> */}
       {/* <Autocomplete
         disablePortal
         id="combo-box-demo"

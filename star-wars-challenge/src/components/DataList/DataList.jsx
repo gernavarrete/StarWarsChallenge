@@ -74,16 +74,22 @@ function DataList({ category, tableData }) {
   const orderByProp = (typeOrder, prop) => {
     let cache = [...dataList];
     setOrder(typeOrder);
-    console.log(typeOrder, prop, "line 77");
     if (typeOrder === "none") return dispatch(dataFilter(dataList));
     // El metodo sort ordena segun el valor mayor, igual o menor que cero dependiendo la funcion comparadora
+    console.log(typeOrder, prop, "line 77");
+    console.log(cache);
     cache.sort((a, b) => {
-      if (parseInt(a[prop]) < parseInt(b[prop]))
+      if (parseInt(a[prop]) < parseInt(b[prop])) {
+        console.log(parseInt(a[prop]), parseInt(b[prop]));
         return typeOrder === "upward" ? -1 : 1;
-      if (parseInt(a[prop]) > parseInt(b[prop]))
-        return typeOrder === "upward" ? 1 : -1;
+      }
+      if (parseInt(a[prop]) > parseInt(b[prop])) {
+        console.log(parseInt(a[prop]), parseInt(b[prop]));
+        return typeOrder === "downward" ? -1 : 1;
+      }
       return 0;
     });
+    console.log(cache);
 
     dispatch(dataFilter(cache));
   };
@@ -204,14 +210,14 @@ function DataList({ category, tableData }) {
                         row[keyLowerCase(5)].slice(1)}
                   </TableCell>
                 ) : null}
-                {/* <TableCell align="center">
-                  <Link
+                <TableCell align="center">
+                  {/* <Link
                     href={`/${category}/[id].js`}
                     as={`/${category}/${row.url.split("/")[5]}`}
                   >
                     view details
-                  </Link>
-                </TableCell> */}
+                  </Link> */}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
